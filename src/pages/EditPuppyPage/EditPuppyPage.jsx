@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 class EditPuppyPage extends Component {
   state = {
     invalidForm: false,
+    // Refer to PuppyListItem to see how puppy is being passed via the <Link>
     formData: this.props.location.state.puppy
   };
 

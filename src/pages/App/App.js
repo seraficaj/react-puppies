@@ -24,11 +24,13 @@ class App extends Component {
 
   handleUpdatePuppy = async updatedPupData => {
     const updatedPuppy = await puppyAPI.update(updatedPupData);
+    // Using map to replace just the puppy that was updated
     const newPuppiesArray = this.state.puppies.map(p => 
       p._id === updatedPuppy._id ? updatedPuppy : p
     );
     this.setState(
       {puppies: newPuppiesArray},
+      // This cb function runs after state is updated
       () => this.props.history.push('/')
     );
   }
