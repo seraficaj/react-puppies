@@ -1,13 +1,15 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var favicon = require('serve-favicon');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const favicon = require('serve-favicon');
 
 require('./config/database');
+require('dotenv').config();
 
-var puppiesRouter = require('./routes/api/puppies');
+const puppiesRouter = require('./routes/api/puppies');
+const usersRouter = require('./routes/api/users');
 
-var app = express();
+const app = express();
 
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(logger('dev'));
@@ -16,6 +18,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // api routes must be before the "catch all" route
 app.use('/api/puppies', puppiesRouter);
+app.use('/api/users', usersRouter);
 
 // "catch all" route
 app.get('/*', function(req, res) {

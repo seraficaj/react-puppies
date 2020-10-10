@@ -1,4 +1,4 @@
-const Puppy = require('../../models/puppy');
+const Puppy = require('../../models/Puppy');
 
 module.exports = {
   index,
