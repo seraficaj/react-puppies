@@ -2,7 +2,7 @@
 
 ## READ THIS WHOLE DOCUMENT BEFORE CLONING AND RUNNING
 
-## Coded lovingly by Jason SErafica
+## Coded lovingly by Jason Serafica
 
 ## Set Up
 
