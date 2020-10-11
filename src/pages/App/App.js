@@ -2,17 +2,23 @@ import React, {Component} from 'react';
 import './App.css';
 import {Route, NavLink} from 'react-router-dom';
 // The following imports all named exports attached to puppyAPI
-import * as puppyAPI from '../../services/puppies-api';
-import PuppyListPage from '../../pages/PuppyListPage/PuppyListPage';
+import * as puppyAPI from '../../utils/puppyService';
 import AddPuppyPage from '../../pages/AddPuppyPage/AddPuppyPage';
-import PuppyDetailPage from '../../pages/PuppyDetailPage/PuppyDetailPage';
 import EditPuppyPage from '../../pages/EditPuppyPage/EditPuppyPage';
+import PuppyDetailPage from '../../pages/PuppyDetailPage/PuppyDetailPage';
+import PuppyListPage from '../../pages/PuppyListPage/PuppyListPage';
+//User sign in and log in pages
+import LoginPage from '../LoginPage/LoginPage';
+import SignupPage from '../../pages/SignupPage/SignupPage';
+import userService from '../../utils/userService';
+
 
 class App extends Component {
   state = {
     puppies: []
   };
 
+  /*--- Puppy CRUD ---*/
   handleAddPuppy = async newPupData => {
     const newPup = await puppyAPI.create(newPupData);
     this.setState(state => ({
@@ -43,6 +49,13 @@ class App extends Component {
     }), () => this.props.history.push('/'));
   }
 
+
+  /*--- User Auth ---*/
+  handleSignupOrLogin = () => {
+    this.setState({user: userService.getUser()});
+    console.log(this.state.user);
+  }
+
   /*--- Lifecycle Methods ---*/
 
   async componentDidMount() {
@@ -59,6 +72,10 @@ class App extends Component {
             <NavLink exact to='/'>PUPPIES LIST</NavLink>
             &nbsp;&nbsp;&nbsp;
             <NavLink exact to='/add'>ADD PUPPY</NavLink>
+            &nbsp;&nbsp;&nbsp;
+            <NavLink exact to='/login'>LOG IN</NavLink>
+            &nbsp;&nbsp;&nbsp;
+            <NavLink exact to='/signup'>SIGN UP</NavLink>
           </nav>
         </header>
         <main>
@@ -80,6 +97,18 @@ class App extends Component {
             <EditPuppyPage
               handleUpdatePuppy={this.handleUpdatePuppy}
               location={location}
+            />
+          } />
+          <Route exact path='/signup' render={({history}) => 
+            <SignupPage
+              history={history}
+              handleSignupOrLogin={this.handleSignupOrLogin}     
+            />
+          } />
+           <Route exact path='/login' render={({history}) => 
+            <LoginPage
+              history={history}
+              handleSignupOrLogin={this.handleSignupOrLogin}     
             />
           } />
         </main>

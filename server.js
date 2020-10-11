@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -10,7 +11,7 @@ const puppiesRouter = require('./routes/api/puppies');
 const usersRouter = require('./routes/api/users');
 
 const app = express();
-
+app.use(cors());
 app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(express.json());
