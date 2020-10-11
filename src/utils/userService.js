@@ -51,4 +51,5 @@ export default {
   getUser,
   logout,
   login,
+  logout
 };
