@@ -6,6 +6,7 @@ function PuppyListPage(props) {
   return (
     <>
       <h1>Puppy List</h1>
+      <h2>Hello, {props.user.name}!</h2>
       <div className='PuppyListPage-grid'>
         {props.puppies.map(puppy => 
           <PuppyListItem

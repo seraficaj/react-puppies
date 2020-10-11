@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import {Link} from 'react-router-dom';
 import userService from "../../utils/userService";
 
 class SignupPage extends Component {
@@ -25,7 +25,8 @@ class SignupPage extends Component {
       });
 
       this.props.handleSignupOrLogin();
-      this.props.history.push("/");
+      
+      this.props.history.push = ("/");
     } catch (err) {
       this.updateMessage(err.message);
     }
@@ -86,7 +87,6 @@ class SignupPage extends Component {
             />
           </div>
             <button
-              type="submit"
               className="btn"
               disabled={this.state.invalidForm}
             >

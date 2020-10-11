@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import {Route, NavLink} from 'react-router-dom';
+import {Route, NavLink, Switch} from 'react-router-dom';
 // The following imports all named exports attached to puppyAPI
 import * as puppyAPI from '../../utils/puppyService';
 import AddPuppyPage from '../../pages/AddPuppyPage/AddPuppyPage';
@@ -15,7 +15,8 @@ import userService from '../../utils/userService';
 
 class App extends Component {
   state = {
-    puppies: []
+    puppies: [],
+    user: userService.getUser()
   };
 
   /*--- Puppy CRUD ---*/
@@ -52,7 +53,9 @@ class App extends Component {
 
   /*--- User Auth ---*/
   handleSignupOrLogin = () => {
-    this.setState({user: userService.getUser()});
+    this.setState({
+      user: userService.getUser()
+    });
     console.log(this.state.user);
   }
 
@@ -79,8 +82,10 @@ class App extends Component {
           </nav>
         </header>
         <main>
+          <Switch>
           <Route exact path='/' render={() => 
             <PuppyListPage
+              user={this.state.user}
               puppies={this.state.puppies}
               handleDeletePuppy={this.handleDeletePuppy}
             />
@@ -111,6 +116,7 @@ class App extends Component {
               handleSignupOrLogin={this.handleSignupOrLogin}     
             />
           } />
+          </Switch>
         </main>
       </div>
     );

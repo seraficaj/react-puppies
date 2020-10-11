@@ -17,7 +17,7 @@ class LoginPage extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await userService.signup(this.state.formData);
+      await userService.login(this.state.formData);
 
       this.props.handleSignupOrLogin();
       this.props.history.push("/");
